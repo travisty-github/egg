@@ -56,3 +56,33 @@ function parse(program) {
     throw new SyntaxError("Unexpected text after program");
   return result.expr;
 }
+
+/* Evaluate an expression */
+function evaluate(expr, env) {
+  switch(expr.type) {
+    case "value":
+      return expr.value;
+
+    case "word":
+      if (expr.name in env)
+        return env[expr.name];
+      else
+      /* jshint -W086 */
+        throw new ReferenceError("Undefined variable: " +
+                                 expr.name);
+    case "apply":
+      /* jshint +W086 */
+      if (expr.operator.type === "word" &&
+          expr.operator.name in specialForms)
+        return specialForms[expr.operator.name](expr.args,
+                                                env);
+      var op = evaluate(expr.operator, env);
+      if (typeof op != "function")
+        throw new TypeError("Applying a non-function.");
+      return op.apply(null, expr.args.map(function(arg) {
+        return evaluate(arg, env);
+      }));
+  }
+}
+
+var specialForms = Object.create(null);
