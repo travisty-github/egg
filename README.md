@@ -1,2 +1,2 @@
-# egg
-A programming language written in Javascript
+# Egg
+A programming language written in Javascript.
