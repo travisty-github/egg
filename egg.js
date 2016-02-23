@@ -1,7 +1,7 @@
 /* Parse Expression
  * Type "value" is a string or number
  * Type "word" is an identifier
- * Type "apply" is an application (of an operator)
+ * Type "apply" is an application
  */
 function parseExpression(program) {
   program = skipSpace(program);
@@ -21,7 +21,7 @@ function parseExpression(program) {
   return parseApply(expr, program.slice(match[0].length));
 }
 
-/* Parse the application of an operaor. E.g. +(1, 2) */
+/* Parse the application. E.g. +(1, 2) */
 function parseApply(expr, program) {
   program = skipSpace(program);
   if (program[0] != "(")
