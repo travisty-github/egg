@@ -116,3 +116,13 @@ specialForms["do"] = function(args, env) {
   });
   return value;
 };
+
+/* jshint -W069 */
+specialForms["define"] = function(args, env) {
+  if (args.length != 2 || args[0].type != "word")
+    throw new SyntaxError("Bad use of define");
+  var value = evaluate(args[1], env);
+  env[args[0].name] = value;
+  return value;
+};
+/* jshint +W069 */
