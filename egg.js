@@ -147,8 +147,12 @@ topEnv.print = function(value) {
 
 /* Convenience function to run programs */
 function run() {
-  var env = Object.create(topEnv);
-  var program = Array.prototype.slice
+  try {
+    var env = Object.create(topEnv);
+    var program = Array.prototype.slice
     .call(arguments, 0).join("\n");
-  return evaluate(parse(program), env);
+    return evaluate(parse(program), env);
+  } catch(error) {
+      return error.toString();
+  }
 }
