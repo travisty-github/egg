@@ -108,3 +108,11 @@ specialForms["while"] = function(args, env) {
      for lack of a meaningful result. */
   return false;
 };
+
+specialForms["do"] = function(args, env) {
+  var value = false;
+  args.forEach(function(arg) {
+    value = evaluate(arg, env);
+  });
+  return value;
+};
