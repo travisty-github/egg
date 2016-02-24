@@ -1,7 +1,20 @@
 $(document).ready(function() {
   $("#btn-run").click(function() {
-    var program = $("#program").val();
-    websiteRun(program);
+    websiteRun($("#program").val());
+  });
+  /* If real time checking, run the program after each keyup but do not show
+     a response */
+  $("#chkbox-real-time").click(function() {
+    if($(this).prop("checked")) {
+      run($("#program").val());
+      $("#program").keyup(function() {
+        run($("#program").val());
+      });
+    } else {
+      $("#program").keyup(function() {});
+      $("#program-form-group").removeClass("has-success");
+      $("#program-form-group").removeClass("has-error");
+    }
   });
 });
 /* Parse Expression
@@ -180,13 +193,26 @@ function run() {
     var env = Object.create(topEnv);
     var program = Array.prototype.slice
     .call(arguments, 0).join("\n");
+    hasError(false);
     return evaluate(parse(program), env);
   } catch(error) {
-      return error.toString();
+    hasError(true);
+    return error.toString();
   }
 }
 
 /* Convenience function to put program output onto web page. */
 function websiteRun(program) {
   $("#output").val(run(program));
+}
+
+/* Track whether the program has an error. */
+function hasError(error) {
+  if (error) {
+    $("#program-form-group").removeClass("has-success");
+    $("#program-form-group").addClass("has-error");
+  } else {
+    $("#program-form-group").removeClass("has-error");
+    $("#program-form-group").addClass("has-success");
+  }
 }
