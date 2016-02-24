@@ -130,3 +130,13 @@ specialForms["define"] = function(args, env) {
   return value;
 };
 /* jshint +W069 */
+
+var topEnv = Object.create(null);
+
+topEnv["true"] = true;
+topEnv["false"] = false;
+/* jshint -W054 */
+["+", "-", "*", "/", "==", "<", ">"].forEach(function(op) {
+  topEnv[op] = new Function("a, b", "return a " + op + " b;");
+/* jshint +W054 */
+});
