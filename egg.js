@@ -132,7 +132,7 @@ specialForms["define"] = function(args, env) {
 /* jshint +W069 */
 
 /* A function */
-specialFormsfun = function(args, env) {
+specialForms.fun = function(args, env) {
   if (!args.length)
     throw new SyntaxError("Functions need a body");
   function name(expr) {
