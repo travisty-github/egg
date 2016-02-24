@@ -131,8 +131,8 @@ specialForms["define"] = function(args, env) {
 };
 /* jshint +W069 */
 
+/* Global environment with basic functions. */
 var topEnv = Object.create(null);
-
 topEnv["true"] = true;
 topEnv["false"] = false;
 /* jshint -W054 */
@@ -140,3 +140,7 @@ topEnv["false"] = false;
   topEnv[op] = new Function("a, b", "return a " + op + " b;");
 /* jshint +W054 */
 });
+topEnv.print = function(value) {
+  console.log(value);
+  return value;
+};
