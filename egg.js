@@ -96,3 +96,15 @@ specialForms["if"] = function(args, env) {
   else
     return evaluate(args[2], env);
 };
+
+specialForms["while"] = function(args, env) {
+  if (args.length != 2)
+    throw new SyntaxError("Bad number of args to while");
+
+  while (evaluate(args[0], env) !== false)
+    evaluate(args[1], env);
+
+  /* Since undefined does not exist in Egg, we return false,
+     for lack of a meaningful result. */
+  return false;
+};
