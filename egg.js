@@ -87,6 +87,7 @@ function evaluate(expr, env) {
 
 var specialForms = Object.create(null);
 
+/* A "if" loop */
 specialForms["if"] = function(args, env) {
   if (args.length != 3)
     throw new SyntaxError("Bad number of args to if");
@@ -97,6 +98,7 @@ specialForms["if"] = function(args, env) {
     return evaluate(args[2], env);
 };
 
+/* A "while" loop */
 specialForms["while"] = function(args, env) {
   if (args.length != 2)
     throw new SyntaxError("Bad number of args to while");
@@ -109,6 +111,7 @@ specialForms["while"] = function(args, env) {
   return false;
 };
 
+/* A "do" loop */
 specialForms["do"] = function(args, env) {
   var value = false;
   args.forEach(function(arg) {
@@ -117,6 +120,7 @@ specialForms["do"] = function(args, env) {
   return value;
 };
 
+/* Defines a variable and assigns new values. */
 /* jshint -W069 */
 specialForms["define"] = function(args, env) {
   if (args.length != 2 || args[0].type != "word")
