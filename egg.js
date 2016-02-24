@@ -130,3 +130,5 @@ specialForms["define"] = function(args, env) {
   return value;
 };
 /* jshint +W069 */
+
+var topEnv = Object.create(null);
