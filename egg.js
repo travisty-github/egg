@@ -86,6 +86,7 @@ function evaluate(expr, env) {
 }
 
 var specialForms = Object.create(null);
+
 specialForms["if"] = function(args, env) {
   if (args.length != 3)
     throw new SyntaxError("Bad number of args to if");
