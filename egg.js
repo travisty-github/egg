@@ -1,3 +1,9 @@
+$(document).ready(function() {
+  $("#btn-run").click(function() {
+    var program = $("#program").val();
+    websiteRun(program);
+  });
+});
 /* Parse Expression
  * Type "value" is a string or number
  * Type "word" is an identifier
@@ -178,4 +184,9 @@ function run() {
   } catch(error) {
       return error.toString();
   }
+}
+
+/* Convenience function to put program output onto web page. */
+function websiteRun(program) {
+  $("#output").val(run(program));
 }
