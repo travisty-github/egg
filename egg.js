@@ -178,11 +178,9 @@ specialForms.array = function(args, env) {
   if (!args.length) {
     throw new SyntaxError("No elements given for array.");
   }
-  var array = {};
-  array.value = [];
-  array.type = "array";
+  var array = [];
   args.forEach(function(e) {
-    array.value.push(evaluate(e, env));
+    array.push(evaluate(e, env));
   });
   return array;
 };
@@ -196,10 +194,10 @@ specialForms.length = function(args, env) {
     throw new SyntaxError("Array.length: Too many arguments given. Expected" +
     "1 got " + args.length);
   }
-  if(args[0].type !== "array") {
-    throw new TypeError("Array.length: Expected array, got " + args[0].type);
+  if(args[0].operator.name!== "array") {
+    throw new TypeError("Array.length: Expected array, got " + args[0].operator.name);
   }
-  return args[0].value.length;
+  return args[0].args.length;
 };
 
 /* Global environment with basic functions. */
