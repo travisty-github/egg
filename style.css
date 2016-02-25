@@ -1,0 +1,18 @@
+#egg-img {
+  width: 100px;
+  height: 100px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#header-row {
+  background-color: #FFFF4E;
+}
+
+textarea {
+  resize: none;
+}
+
+* {
+  /*border: 1px red solid;*/
+}
