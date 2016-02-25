@@ -173,6 +173,7 @@ specialForms.fun = function(args, env) {
   };
 };
 
+/* Array type. */
 specialForms.array = function(args, env) {
   if (!args.length) {
     throw new SyntaxError("No elements given for array.");
