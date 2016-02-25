@@ -178,16 +178,15 @@ specialForms.array = function(args, env) {
   if (!args.length) {
     throw new SyntaxError("No elements given for array.");
   }
-  var array = {};
-  array.value = [];
-  array.type = "array";
+  var array = [];
   args.forEach(function(e) {
-    array.value.push(evaluate(e, env));
+    array.push(evaluate(e, env));
   });
   return array;
 };
 /* Return array length */
 specialForms.length = function(args, env) {
+  console.log("array.length ");
   console.log(args);
   if (!args.length) {
     throw new SyntaxError("Array.length: No array given");
@@ -196,29 +195,29 @@ specialForms.length = function(args, env) {
     throw new SyntaxError("Array.length: Too many arguments given. Expected" +
     "1 got " + args.length);
   }
-  if(args[0].operator.name!== "array") {
-    throw new TypeError("Array.length: Expected array, got " + args[0].operator.name);
-  }
-  return args[0].args.length;
+  return args[0].length;
 };
 
 /* Get an element from an array */
 specialForms.element = function(args, env) {
-  if (!args.length) {
-    throw new SyntaxError("Array.element: No array given");
+  console.log("array.element");
+  console.log(args);
+  if (args.length > 2 || args.length <= 0) {
+    throw new SyntaxError("Array.element:  Incorrect number of arguments " +
+    "given. Expected 2 got " + args.length);
   }
-  if (args.length > 2) {
-    throw new SyntaxError("Array.element: Too many arguments given. Expected" +
-    "2 got " + args.length);
+  var index = evaluate(args[1], env);
+  var indexType = typeof index;
+  if(indexType !== "number") {
+    throw new TypeError("Array.element: Expected \"number\", got \"" +
+    indexType + "\"");
   }
-  if(args[0].operator.name!== "array") {
-    throw new TypeError("Array.element: Expected array, got " + args[0].operator.name);
+  var array = evaluate(args[0], env);
+  console.log(array);
+  if (index < 0 || index > array.length) {
+    throw new Error("Array.element: index " + index + " out of bounds.");
   }
-  var indexType = evaluate(args[1], env);
-  if(typeof indexType !== "number") {
-    throw new TypeError("Array.element: Expected number, got " + args[0].operator.name);
-  }
-  return(args[0].args[1].value);
+  return(array[index]);
 };
 
 /* Global environment with basic functions. */
@@ -244,6 +243,7 @@ function run() {
     hasError(false);
     return evaluate(parse(program), env);
   } catch(error) {
+    console.log(error);
     hasError(true);
     return error.toString();
   }
