@@ -11,7 +11,7 @@ $(document).ready(function() {
         run($("#program").val());
       });
     } else {
-      $("#program").keyup(function() {});
+      $("#program").off("keyup");
       $("#program-form-group").removeClass("has-success");
       $("#program-form-group").removeClass("has-error");
     }
