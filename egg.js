@@ -236,6 +236,7 @@ topEnv["false"] = false;
 });
 topEnv.print = function(value) {
   console.log(value);
+  $("#output").val($("#output").val() + value + "\n");
   return value;
 };
 
@@ -256,7 +257,8 @@ function run() {
 
 /* Convenience function to put program output onto web page. */
 function websiteRun(program) {
-  $("#output").val(run(program));
+  $("#output").val("");
+  (run(program));
 }
 
 /* Track whether the program has an error. */
