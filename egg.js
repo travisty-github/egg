@@ -250,6 +250,7 @@ function run() {
     return evaluate(parse(program), env);
   } catch(error) {
     console.log(error);
+    $("#output").val(error);
     hasError(true);
     return error.toString();
   }
