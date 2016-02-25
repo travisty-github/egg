@@ -60,11 +60,17 @@ function parseApply(expr, program) {
   return parseApply(expr, program.slice(1));
 }
 
-/* Remove leading space */
+/* Remove space and comments */
 function skipSpace(string) {
-  var first = string.search(/\S/);
-  if (first == -1) return "";
-  return string.slice(first);
+  var regex = /(\s+|#.*?\n)/;
+  match = regex.exec(string);
+
+  while(match !== null && match.index === 0 ) {
+    string = string.slice(match[0].length);
+    match = regex.exec(string);
+  }
+
+  return string;
 }
 
 /* Parses the program and returns an object containing expressions
