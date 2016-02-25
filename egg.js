@@ -178,9 +178,11 @@ specialForms.array = function(args, env) {
   if (!args.length) {
     throw new SyntaxError("No elements given for array.");
   }
-  var array = [];
+  var array = {};
+  array.value = [];
+  array.type = "array";
   args.forEach(function(e) {
-    array.push(evaluate(e, env));
+    array.value.push(evaluate(e, env));
   });
   return array;
 };
