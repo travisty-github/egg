@@ -154,6 +154,26 @@ specialForms["define"] = function(args, env) {
   env[args[0].name] = value;
   return value;
 };
+
+/* Assigns a value to an existing variable. Updates the variable in the outer scope if it doesn't exist in the inner scope. If the variable is not defined at all, throws a ReferenceError. */
+specialForms["set"] = function(args, env) {
+  if (args.length != 2 || args[0].type != "word")
+    throw new SyntaxError("Bad use of set");
+  var value = evaluate(args[1], env);
+
+  while (env !== null && !(Object.prototype.hasOwnProperty.call(env, args[0].name))) {
+    env = Object.getPrototypeOf(env);
+  }
+
+  // Check whether the variable was found
+  if (env === null) {
+    throw new ReferenceError("set: Cannot find variable " + args[0].name);
+  }
+
+  // The variable was found. Set the value in the found scope and return value.
+  env[args[0].name] = value;
+  return value;
+};
 /* jshint +W069 */
 
 /* A function */
