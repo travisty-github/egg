@@ -200,6 +200,25 @@ specialForms.length = function(args, env) {
   return args[0].args.length;
 };
 
+/* Get an element from an array */
+specialForms.element = function(args, env) {
+  if (!args.length) {
+    throw new SyntaxError("Array.element: No array given");
+  }
+  if (args.length > 2) {
+    throw new SyntaxError("Array.element: Too many arguments given. Expected" +
+    "2 got " + args.length);
+  }
+  if(args[0].operator.name!== "array") {
+    throw new TypeError("Array.element: Expected array, got " + args[0].operator.name);
+  }
+  var indexType = evaluate(args[1], env);
+  if(typeof indexType !== "number") {
+    throw new TypeError("Array.element: Expected number, got " + args[0].operator.name);
+  }
+  return(args[0].args[1].value);
+};
+
 /* Global environment with basic functions. */
 var topEnv = Object.create(null);
 topEnv["true"] = true;
