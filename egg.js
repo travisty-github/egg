@@ -292,7 +292,7 @@ function run() {
 /* Convenience function to put program output onto web page. */
 function websiteRun(program) {
   $("#output").val("");
-  (run(program));
+  run(program);
 }
 
 /* Track whether the program has an error. */
