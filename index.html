@@ -54,6 +54,92 @@ https://pixabay.com/en/egg-hard-boiled-sliced-yolk-half-25369/ -->
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2">
+        <h3>Syntax</h3>
+        <ul>
+          <li>
+            <p>
+              <strong>Assignment:</strong> <code>define(var, val)</code>. Assigns a value to a variable.
+              <br />For example:
+              <code>define(a, 10)</code> assigns the value <code>10</code> to variable <code>a</code>
+              </thead>
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Output:</strong> <code>print(output)</code>. Prints the expression <code>output</code> to the result text area.
+              <br /> For example: <code>print("Hello world!")</code> outputs the string "Hello world!" to the result text area.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Code blocks:</strong> <code>do([statement1], ...)</code>. Executes the statements in the parentheses separated by commas.
+              <br />For example: <code>do(print(5),define(a, 2))</code> prints "5" to the result text area and assignes the value 2 to variable "a".
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Operators:</strong> <code>[operator]([operands])</code>. Performs the operation <code>[operator]</code> on the operands in parentheses. Valid operators are
+              <ul>
+                <li>
+                  <code>+</code> Addition
+                </li>
+                <li>
+                  <code>-</code> Subtraction
+                </li>
+                <li>
+                  <code>*</code> Multiplication
+                </li>
+                <li>
+                  <code>/</code> Division
+                </li>
+                <li>
+                  <code>==</code> Equality
+                </li>
+                <li>
+                  <code><</code> Less than
+                </li>
+                <li>
+                  <code>></code> Greater than
+                </li>
+              </ul>
+              <br />For example: <code>+(2,3)</code> performs the operation 2+3 resulting in a value of 5.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Functions:</strong> <code>fun([arg1], [arg2], ...,
+                [funtion])</code>. A series of named arguments are provided first. The final argument is the function logic.
+              <br /> For example: <code>define(plusOne, fun(a, +(a, 1)))</code>. This assigns the variable <code>plusOne</code> with a function that takes a single argument <code>a</code> and adds 1 to it.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>If statement:</strong> <code>if([test], [true], [false])</code>. Tests condition <code>[test]</code> and executes either <code>[true]</code> or <code>false</code> based on result.<br />For example: <code>if(==(4,5),print("equal"),print("not equal"))</code> outputs "not equal".
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>While loop:</strong> <code>while([condition], [statement])</code>. Execute <code>[statement]</code> while <code>[condition]</code> is true.<br />For example: <code>do(define(a,0),while(<(a,10),do(print(a),define(a,+(a,1)))))</code> prints out a sequence of numbers 0 - 9.
+            </p>
+          </li>
+          <li>
+            <p>
+              <strong>Array definition:</strong> <code>array([el1], ...)</code>. Defines an array of elements.<br />For example: <code>do(define(a, array(1, 2, 3)), print(a))</code> outputs 1,2,3 to the result text area.
+            </p>
+          </li>
+          <li>
+            <strong>Array length:</strong> <code>length([array])</code>. Returns the length of <code>[array]</code>.<br />For example: <code>do(define(a,array(1, 2, 3)),print(length(a)))</code> outputs 3 to the result text area.
+          </li>
+          <li>
+            <p>
+              <strong>Array element:</strong> <code>element([array], [index])</code>. Returns the element at the zero based index position <code>[index]</code>.<br />For example: <code>do(define(a, array(1, "x", 7)),print(element(a, 1)))</code> outputs "x" to the result text area.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
 
