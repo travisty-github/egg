@@ -174,6 +174,19 @@ specialForms["set"] = function(args, env) {
   env[args[0].name] = value;
   return value;
 };
+
+/* Get input from user. Takes an optional arguments of a prompt question and default text. */
+specialForms["input"] = function(args, env) {
+  var promptText = "Enter input";
+  var defaultText = "";
+  if (args.length >= 1) {
+    promptText = args[0].value;
+  }
+  if (args.length >= 2) {
+    defaultText = args[1].value;
+  }
+  return prompt(promptText, defaultText);
+};
 /* jshint +W069 */
 
 /* A function */
