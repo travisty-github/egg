@@ -2,20 +2,6 @@ $(document).ready(function() {
   $("#btn-run").click(function() {
     websiteRun($("#program").val());
   });
-  /* If real time checking, run the program after each keyup but do not show
-     a response */
-  $("#chkbox-real-time").click(function() {
-    if($(this).prop("checked")) {
-      run($("#program").val());
-      $("#program").keyup(function() {
-        run($("#program").val());
-      });
-    } else {
-      $("#program").off("keyup");
-      $("#program-form-group").removeClass("has-success");
-      $("#program-form-group").removeClass("has-error");
-    }
-  });
 });
 /* Parse Expression
  * Type "value" is a string or number
