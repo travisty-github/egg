@@ -186,6 +186,21 @@ specialForms.array = function(args, env) {
   });
   return array;
 };
+/* Return array length */
+specialForms.length = function(args, env) {
+  console.log(args);
+  if (!args.length) {
+    throw new SyntaxError("Array.length: No array given");
+  }
+  if (args.length > 1) {
+    throw new SyntaxError("Array.length: Too many arguments given. Expected" +
+    "1 got " + args.length);
+  }
+  if(args[0].type !== "array") {
+    throw new TypeError("Array.length: Expected array, got " + args[0].type);
+  }
+  return args[0].value.length;
+};
 
 /* Global environment with basic functions. */
 var topEnv = Object.create(null);
