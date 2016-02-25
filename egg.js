@@ -186,8 +186,6 @@ specialForms.array = function(args, env) {
 };
 /* Return array length */
 specialForms.length = function(args, env) {
-  console.log("array.length ");
-  console.log(args);
   if (!args.length) {
     throw new SyntaxError("Array.length: No array given");
   }
@@ -195,7 +193,8 @@ specialForms.length = function(args, env) {
     throw new SyntaxError("Array.length: Too many arguments given. Expected" +
     "1 got " + args.length);
   }
-  return args[0].length;
+  var array = evaluate(args[0], env);
+  return array.length;
 };
 
 /* Get an element from an array */
