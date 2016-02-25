@@ -9,8 +9,9 @@
   background-color: #FFFF4E;
 }
 
-textarea {
+#program,#output {
   resize: vertical;
+  height: 8em;
 }
 
 .container-fluid.extra-margin {
