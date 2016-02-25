@@ -13,6 +13,10 @@ textarea {
   resize: vertical;
 }
 
+.container-fluid.extra-margin {
+  margin-bottom: 50px;
+}
+
 * {
   /*border: 1px red solid;*/
 }
