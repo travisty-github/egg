@@ -173,6 +173,17 @@ specialForms.fun = function(args, env) {
   };
 };
 
+specialForms.array = function(args, env) {
+  if (!args.length) {
+    throw new SyntaxError("No elements given for array.");
+  }
+  var array = [];
+  args.forEach(function(e) {
+    array.push(evaluate(e, env));
+  });
+  return array;
+};
+
 /* Global environment with basic functions. */
 var topEnv = Object.create(null);
 topEnv["true"] = true;
