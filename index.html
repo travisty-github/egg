@@ -68,6 +68,11 @@ https://pixabay.com/en/egg-hard-boiled-sliced-yolk-half-25369/ -->
           </li>
           <li>
             <p>
+              <strong>Nonlocal Assignment:</strong> <code>set([var], [val])</code>. Assigns a value to a variable. If the variable is not found in the local scope, it will traverse each outer scope until the variable is found. If the variable is not defined in any scope, a ReferenceError will be thrown.<br />For example: <code>do(define(x, 4), define(setx, fun(val, set(x, val))), setx(50), print(x))</code> will return <code>50</code>.
+            </p>
+          </li>
+          <li>
+            <p>
               <strong>Output:</strong> <code>print(output)</code>. Prints the expression <code>output</code> to the result text area.
               <br /> For example: <code>print("Hello world!")</code> outputs the string "Hello world!" to the result text area.
             </p>
