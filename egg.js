@@ -14,11 +14,20 @@ function parseExpression(program) {
   /* Disable JSHint warning about assignment in conditional expression */
   /* jshint -W084 */
   if (match = /^"([^"]*)"/.exec(program))
-    expr = {type: "value", value: match[1]};
+    expr = {
+      type: "value",
+      value: match[1]
+    };
   else if (match = /^\d+\b/.exec(program))
-    expr = {type: "value", value: Number(match[0])};
+    expr = {
+      type: "value",
+      value: Number(match[0])
+    };
   else if (match = /^[^\s(),"]+/.exec(program))
-    expr = {type: "word", name: match[0]};
+    expr = {
+      type: "word",
+      name: match[0]
+    };
   else
     throw new SyntaxError("Unexpected syntax: " + program);
   /* jshint +W084 */
@@ -30,10 +39,17 @@ function parseExpression(program) {
 function parseApply(expr, program) {
   program = skipSpace(program);
   if (program[0] != "(")
-    return {expr: expr, rest: program};
+    return {
+      expr: expr,
+      rest: program
+    };
 
   program = skipSpace(program.slice(1));
-  expr = {type: "apply", operator: expr, args: []};
+  expr = {
+    type: "apply",
+    operator: expr,
+    args: []
+  };
   while (program[0] != ")") {
     var arg = parseExpression(program);
     expr.args.push(arg.expr);
@@ -51,7 +67,7 @@ function skipSpace(string) {
   var regex = /(\s+|#.*?\n)/;
   match = regex.exec(string);
 
-  while(match !== null && match.index === 0 ) {
+  while (match !== null && match.index === 0) {
     string = string.slice(match[0].length);
     match = regex.exec(string);
   }
@@ -70,7 +86,7 @@ function parse(program) {
 
 /* Evaluate an expression */
 function evaluate(expr, env) {
-  switch(expr.type) {
+  switch (expr.type) {
     case "value":
       return expr.value;
 
@@ -80,13 +96,13 @@ function evaluate(expr, env) {
       else
       /* jshint -W086 */
         throw new ReferenceError("Undefined variable: " +
-                                 expr.name);
+        expr.name);
     case "apply":
       /* jshint +W086 */
       if (expr.operator.type === "word" &&
-          expr.operator.name in specialForms)
+        expr.operator.name in specialForms)
         return specialForms[expr.operator.name](expr.args,
-                                                env);
+          env);
       var op = evaluate(expr.operator, env);
       if (typeof op != "function")
         throw new TypeError("Applying a non-function.");
@@ -179,6 +195,7 @@ specialForms["input"] = function(args, env) {
 specialForms.fun = function(args, env) {
   if (!args.length)
     throw new SyntaxError("Functions need a body");
+
   function name(expr) {
     if (expr.type != "word")
       throw new SyntaxError("Arg names must be words");
@@ -216,7 +233,7 @@ specialForms.length = function(args, env) {
   }
   if (args.length > 1) {
     throw new SyntaxError("Array.length: Too many arguments given. Expected" +
-    "1 got " + args.length);
+      "1 got " + args.length);
   }
   var array = evaluate(args[0], env);
   return array.length;
@@ -228,20 +245,20 @@ specialForms.element = function(args, env) {
   console.log(args);
   if (args.length > 2 || args.length <= 0) {
     throw new SyntaxError("Array.element:  Incorrect number of arguments " +
-    "given. Expected 2 got " + args.length);
+      "given. Expected 2 got " + args.length);
   }
   var index = evaluate(args[1], env);
   var indexType = typeof index;
-  if(indexType !== "number") {
+  if (indexType !== "number") {
     throw new TypeError("Array.element: Expected \"number\", got \"" +
-    indexType + "\"");
+      indexType + "\"");
   }
   var array = evaluate(args[0], env);
   console.log(array);
   if (index < 0 || index > array.length) {
     throw new Error("Array.element: index " + index + " out of bounds.");
   }
-  return(array[index]);
+  return (array[index]);
 };
 
 /* Global environment with basic functions. */
@@ -251,7 +268,7 @@ topEnv["false"] = false;
 /* jshint -W054 */
 ["+", "-", "*", "/", "==", "<", ">"].forEach(function(op) {
   topEnv[op] = new Function("a, b", "return a " + op + " b;");
-/* jshint +W054 */
+  /* jshint +W054 */
 });
 topEnv.print = function(value) {
   console.log(value);
@@ -264,10 +281,10 @@ function run() {
   try {
     var env = Object.create(topEnv);
     var program = Array.prototype.slice
-    .call(arguments, 0).join("\n");
+      .call(arguments, 0).join("\n");
     hasError(false);
     return evaluate(parse(program), env);
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     $("#output").val(error);
     hasError(true);
